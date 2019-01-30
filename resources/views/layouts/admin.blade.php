@@ -10,7 +10,8 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
@@ -30,12 +31,6 @@
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href="/cuccutto/assets/plugins/bootstrap/css/bootstrap.min.css">
 
-    <!-- Weather css -->
-    <link href="/cuccutto/assets/css/svg-weather.css" rel="stylesheet">
-
-    <!-- Echart js -->
-    <script src="/cuccutto/assets/plugins/charts/echarts/js/echarts-all.js"></script>
-
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="/cuccutto/assets/css/main.css">
 
@@ -44,6 +39,8 @@
 
     <!--color css-->
     <link rel="stylesheet" type="text/css" href="/cuccutto/assets/css/color/color-1.min.css" id="color"/>
+
+    @yield('style')
 
 </head>
 <body class="sidebar-mini fixed">
@@ -58,7 +55,7 @@
 </div> -->
     <!-- Navbar-->
     <header class="main-header-top hidden-print">
-        <a href="index.html" class="logo"><img class="img-fluid able-logo" src="/cuccutto/assets/images/logo.png" alt="Theme-logo"></a>
+        <a href="{{ route('dashboard') }}" class="logo"><img class="img-fluid able-logo" src="/cuccutto/assets/images/logo.png" alt="Theme-logo"></a>
         <nav class="navbar navbar-static-top">
             <!-- Sidebar toggle button--><a href="#!" data-toggle="offcanvas" class="sidebar-toggle"></a>
             <!-- Navbar Right Menu-->
@@ -138,8 +135,12 @@
                                 <div class="dropdown-divider m-0"></div>
                             </li>
                             <li><a href="lock-screen.html"><i class="icon-lock"></i> Lock Screen</a></li>
-                            <li><a href="#!"><i class="icon-logout"></i> Logout</a></li>
-
+                            <li><a  href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    <i class="icon-logout"></i> Logout</a></li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </ul>
                     </li>
                 </ul>
@@ -502,9 +503,7 @@
 <!-- notification -->
 <script src="/cuccutto/assets/plugins/notification/js/bootstrap-growl.min.js"></script>
 
-<!-- Rickshaw Chart js -->
-<script src="/cuccutto/assets/plugins/d3/d3.js"></script>
-<script src="/cuccutto/assets/plugins/rickshaw/rickshaw.js"></script>
+
 
 <!-- Sparkline charts -->
 <script src="/cuccutto/assets/plugins/jquery-sparkline/dist/jquery.sparkline.js"></script>
@@ -513,11 +512,14 @@
 <script src="/cuccutto/assets/plugins/waypoints/jquery.waypoints.min.js"></script>
 <script src="/cuccutto/assets/plugins/countdown/js/jquery.counterup.js"></script>
 
+
 <!-- custom js -->
 <script type="text/javascript" src="/cuccutto/assets/js/main.min.js"></script>
-<script type="text/javascript" src="/cuccutto/assets/pages/dashboard.js"></script>
 <script type="text/javascript" src="/cuccutto/assets/pages/elements.js"></script>
 <script src="/cuccutto/assets/js/menu.min.js"></script>
+
+@yield('script')
+
 </body>
 
 </html>

@@ -18,8 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
-Route::group(['prefix' => 'admin' , 'middleware' => 'auth' , 'namespace'=>'Admin'],function(){
-    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::group(['middleware' => 'auth'],function(){
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::resource('products', 'ProductController');
+    Route::resource('blog_news','BlogNewsController');
+    Route::post('products/delete/{id}', 'ProductController@destroy')->name('productsDelete');
 });
