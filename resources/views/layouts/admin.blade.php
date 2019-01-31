@@ -483,13 +483,12 @@
 <!-- Warning Section Ends -->
 
 <!-- Required Jqurey -->
-<script src="/cuccutto/assets/plugins/jquery/dist/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/cuccutto/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="/cuccutto/assets/plugins/tether/dist/js/tether.min.js"></script>
 
 <!-- Required Fremwork -->
-<script src="/cuccutto/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <!-- waves effects.js -->
 <script src="/cuccutto/assets/plugins/Waves/waves.min.js"></script>
 

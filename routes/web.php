@@ -25,4 +25,5 @@ Route::group(['middleware' => 'auth'],function(){
     Route::resource('products', 'ProductController');
     Route::resource('blog_news','BlogNewsController');
     Route::post('products/delete/{id}', 'ProductController@destroy')->name('productsDelete');
+    Route::post('products/create','ProductController@create')->name('productsCreate');
 });

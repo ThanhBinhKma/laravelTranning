@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App;
 use App\Product;
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -29,11 +30,25 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $model = new Product();
+        $model->sku = $request->input('sku');
+        $model->name = $request->input('name');
+        $model->price = $request->input('price');
+        $model->save();
+        return redirect(route('products.index'));
     }
-
+    public  function error(Request $request){
+        $this->validate($request,
+            ['sku'=>'required'],
+            ['sku.required'=>'Vui lòng nhập dữ liệu'],
+            ['name'=>'required'],
+            ['name.required'=>'Vui lòng nhập dữ liệu'],
+            ['price'=>'required'],
+            ['price.required'=>'Vui lòng nhập dữ liệu']
+            );
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -96,7 +111,7 @@ class ProductController extends Controller
             ] );
         } else {
             $flag = $model->delete();
-            if ($flag) {
+                if ($flag) {
                 return response()->json( [
                     'status' => 200,
                     'message' => 'SUCCESS'
